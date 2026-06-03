@@ -1,3 +1,4 @@
+//Array of currency codes
 const currencyCodes = [
     "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
     "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
@@ -18,11 +19,19 @@ const currencyCodes = [
     "ZWL"
 ];
 
-const CurrrencySelect = () => {
+const CurrrencySelect = ({selectedCurrency, handleCurrency}) => {
+    //Extract the country code from the selected code
+    const countryCode = selectedCurrency.substring(0,2)
   return (
     <div className="currency-select">
-      <img src="https://flagsapi.com/US/flat/64.png" alt="Flag" />
-      <select className="currency-dropdown">
+      <img src={`https://flagsapi.com/${countryCode}/flat/64.png`} alt="Flag" />
+      <select 
+      onChange={handleCurrency}
+      className="currency-dropdown" 
+      value={selectedCurrency}>
+      {currencyCodes.map(currency=>(
+        <option key={currency} value={currency}>{currency}</option>
+      ))}
         <option value="USD" selected>
           USD
         </option>
